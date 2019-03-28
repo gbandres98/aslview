@@ -2,15 +2,15 @@ import kaggle
 import zipfile
 from pathlib import Path
 
-def prepare_data():
+def prepare_data(train_dir: str):
     print('Checking existence of training dataset...')
-    dataset = Path('./data/asl_alphabet_train')
+    dataset = Path(train_dir)
     if (dataset.exists() and dataset.stat().st_size > 500):
         print('Dataset exists')
     else:
         print('Dataset not found, downloading from Kaggle')
         download_dataset()
-        unzip()
+        unzip(train_dir)
 
 def download_dataset():
     kaggle.api.authenticate()
@@ -20,7 +20,7 @@ def download_dataset():
             quiet=False, unzip=True
     )
 
-def unzip():
-    zip_ref = zipfile.ZipFile('./data/asl_alphabet_train.zip', 'r')
+def unzip(train_dir: str):
+    zip_ref = zipfile.ZipFile(train_dir + '.zip', 'r')
     zip_ref.extractall('./data/')
     zip_ref.close()
