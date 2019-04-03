@@ -4,8 +4,8 @@ from keras.layers import Activation, Dropout, Flatten, Dense
 
 def create_model(classes_no: int):
     model = Sequential()
-    
-    model.add(Conv2D(64, kernel_size=4, strides=1, activation='relu', input_shape=(64, 64, 3))) # 64x64, 3D for RGB
+
+    model.add(Conv2D(64, kernel_size=4, strides=1, activation='relu', input_shape=(150, 150, 3)))
     model.add(Conv2D(64, kernel_size=4, strides=2, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Conv2D(128, kernel_size=4, strides=1, activation='relu'))
@@ -19,5 +19,5 @@ def create_model(classes_no: int):
     model.add(Dense(classes_no, activation='softmax'))
 
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-    
+
     return model
