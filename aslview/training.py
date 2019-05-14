@@ -45,4 +45,7 @@ def train_model(model):
         validation_data=validation_generator,
         validation_steps=800 // batch_size)
 
-    weights('first_try.h5')  # always save your weights after training or during training
+    model.save_weights('hola.h5')
+    print('weights saved')
+    
+    #weights('first_try.h5')  # always save your weights after training or during training
