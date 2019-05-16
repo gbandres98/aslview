@@ -29,21 +29,21 @@ def train_model(model):
     # batches of augmented image data
     train_generator = train_datagen.flow_from_directory(
             './data/asl_alphabet_train',  # this is the target directory
-            target_size=(150, 150),  # all images will be resized to 150x150
+            target_size=(64, 64),  # all images will be resized to 150x150
             batch_size=batch_size)  # since we use binary_crossentropy loss, we need binary labels
 
     # this is a similar generator, for validation data
     validation_generator = test_datagen.flow_from_directory(
             './data/asl_alphabet_test',
-            target_size=(150, 150),
+            target_size=(64, 64),
             batch_size=batch_size)
 
     model.fit_generator(
         train_generator,
         steps_per_epoch=2000 // batch_size,
-        epochs=50,
+        epochs=20,
         validation_data=validation_generator,
-        validation_steps=800 // batch_size)
+        validation_steps=500 // batch_size)
 
     model.save_weights('hola.h5')
     print('weights saved')
