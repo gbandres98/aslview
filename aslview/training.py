@@ -1,5 +1,6 @@
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
-
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
 
 def train_model(model):
     # datagen = ImageDataGenerator(
@@ -37,6 +38,19 @@ def train_model(model):
             './data/asl_alphabet_test',
             target_size=(64, 64),
             batch_size=batch_size)
+
+
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
+    config.log_device_placement = False  # to log device placement (on which device the operation ran)
+                                    # (nothing gets printed in Jupyter, only if you run it standalone)
+    
+    
+    sess = tf.Session(config=config)
+    #sess.run(tf.global_variables_initializer())
+    
+    set_session(sess)  # set this TensorFlow session as the default session for Keras
+
 
     model.fit_generator(
         train_generator,
