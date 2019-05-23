@@ -21,7 +21,7 @@ def create_model(classes_no: int):
     model.add(Dense(classes_no, activation='softmax'))
 
     """
-
+	Este es el primer modelo que probamos, pero no conseguimos una buena precision. Creemos que es por un mal preprocesamiento de las imagenes.
 
     model.add(Conv2D(16, kernel_size = [3,3], padding = 'same', activation = 'relu', input_shape = (64,64,3)))
     model.add(Conv2D(32, kernel_size = [3,3], padding = 'same', activation = 'relu'))

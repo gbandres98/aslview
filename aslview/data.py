@@ -2,6 +2,7 @@ import kaggle
 import zipfile
 from pathlib import Path
 
+# Metodo que descarga y descomprime las imagenes de prueba
 def prepare_data(train_dir, test_dir):
     print('Checking existence of training dataset...')
     train_set = Path(train_dir)

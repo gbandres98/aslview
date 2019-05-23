@@ -18,26 +18,20 @@ prepare_data(train_dir=TRAIN_DIR, test_dir=TEST_DIR)
 print(classes)
 
 config = tf.ConfigProto()
-config.gpu_options.allow_growth = True # dynamically grow the memory used on the GPU
-#config.log_device_placement = True # to log device placement (on which device the operation ran)
-# (nothing gets printed in Jupyter, only if you run it standalone)
-
-
+config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
-#sess.run(tf.global_variables_initializer())
-
-set_session(sess) # set this TensorFlow session as the default session for Keras
+set_session(sess)
 
 model = create_model(classes_no=classes_no)
 
 model.summary()
 
-#model.load_weights('hola.h5')
+model.load_weights('pesos.h5')
 
-#img = cv2.imread('./data/asl_alphabet_test/N/N_test.jpg')
-#img = cv2.resize(img,(64,64))
-#img = np.reshape(img,[1,64,64,3])
-#img = np.expand_dims(img,axis=0)
+img = cv2.imread('./data/asl_alphabet_test/N/N_test.jpg')
+img = cv2.resize(img,(64,64))
+img = np.reshape(img,[1,64,64,3])
+img = np.expand_dims(img,axis=0)
 
 
 images = []
@@ -51,11 +45,8 @@ for img in os.listdir('./data/test/'):
     img = np.expand_dims(img, axis=0)
     images.append(img)
 
-# stack up images list to pass for prediction
 images = np.vstack(images)
-
-
-#res = model.predict_classes(images)
+res = model.predict_classes(images)
 
 for i in range(len(res)):
     if names[i].split('_')[0] == classes[res[i]]:

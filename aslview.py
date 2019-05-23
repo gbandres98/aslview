@@ -5,7 +5,7 @@ from glob import glob
 
 TRAIN_DIR = './data/asl_alphabet_train'
 TEST_DIR = './data/asl_alphabet_test'
-classes = [folder[len(TRAIN_DIR) + 1:] for folder in glob(TRAIN_DIR + '/*')]
+classes = [folder[len(TRAIN_DIR) + 1:] for folder in glob(TRAIN_DIR + '/*')] # Nombres de las clases
 classes_no = len(classes)
 
 prepare_data(train_dir=TRAIN_DIR, test_dir=TEST_DIR)
